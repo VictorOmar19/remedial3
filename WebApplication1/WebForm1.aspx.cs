@@ -80,7 +80,8 @@ namespace WebApplication1
                 Label1.Text = "Error al insertar los datos ";
             }
         }
-        protected void Button2_Click(object sender, EventArgs e)
+
+        protected void Button6_Click(object sender, EventArgs e)
         {
             string[] datos = new string[6];
 
@@ -100,6 +101,6 @@ namespace WebApplication1
             {
                 Label2.Text = "Error al insertar los datos ";
             }
-        }
+        }        
     }
 }

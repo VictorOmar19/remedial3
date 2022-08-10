@@ -59,10 +59,12 @@
             seleccione el id del encargado<br />
             <asp:DropDownList ID="DropDownList4" runat="server">
             </asp:DropDownList>
+            <br />
         <br />
             <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
             <br />
-        <asp:Button ID="Button2" runat="server" Text="agregar datos" OnClick="Button1_Click" />
+            <br />
+            <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Button" />
 &nbsp;
         &nbsp;
         &nbsp;<asp:Button ID="Button3" runat="server" Text="Mostar Datos" OnClick="Button4_Click" />
