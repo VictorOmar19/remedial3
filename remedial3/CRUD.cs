@@ -88,6 +88,33 @@ namespace remedial3
             return actualizacion;//Se retorna la Lista 
         }
 
+        public List<obra> ListaObra(ref string mensaje, ref string mensajeC)//Metodo de la Lista Actualización
+        {
+            string comandoSql = "select * from Obra;", etiqueta = "BDConstructora";//Variables y Utilidades
+            DataSet dataSet = null;
+            DataTable dataTable = null;
+
+            List<obra> actualizacion = new List<obra>();//Creacion de una lista del tipo Actualizacion para trabajar
+
+            dataSet = AC.LecturaSet(comandoSql, AC.ConnectionEstablecida(ref mensajeC), ref mensaje, etiqueta);//Se llena el DataSet con los datos de la BD
+            if (dataSet != null)//Si e DataSet tiene datos entonces
+            {
+                dataTable = dataSet.Tables[0];//Se crea un DataTable y se llena con la informacion del DataSet
+                actualizacion = dataTable.AsEnumerable().Select(row => new obra//El datatable es como un numerable y se hace una seleccion, cada row será igual a un nuevo objeto de a clase seleccionada
+                {//Por cada iterancia vamos a pasar los parámetros de mi objeto
+                    IdObra = row.Field<int>("ID_Obra"),
+                    Nombre_Obra = row.Field<string>("Nom_Obra"),
+                    Direccion = row.Field<string>("Direccion"),
+                    fecha_inicio = row.Field<DateTime>("Fecha_Inicio"),
+                    fecha_fin = row.Field<DateTime>("Fecha_Termino"),
+                    idDueño = row.Field<int>("ID_Dueno"),
+                    id_Encargado = row.Field<int>("ID_Encargado"),
+                }).ToList();//Se añade la información a la Lista
+            }
+            return actualizacion;//Se retorna la Lista 
+        }
+
+
 
         public bool InsertarMaterial(string[] nuevoDatos, ref string mensaje, ref string mensajeC)
         {
@@ -167,6 +194,23 @@ namespace remedial3
             info[6].Value = Convert.ToInt32(nuevoDatos[6]);
             info[7].Value = Convert.ToInt32(nuevoDatos[7]);
             respuesta = AC.BaseSegura(instrccion, AC.ConnectionEstablecida(ref mensajeC), ref mensaje, info);
+            return respuesta;
+        }
+        public bool EliminarObra(ref string Mensaje, ref string MensajeC, int ID)
+        {
+            bool respuesta = false;
+
+            string instruccion = "DELETE from Obra where ID_Obra = @ID_Obra";
+
+            SqlParameter[] evaluacion = new SqlParameter[]
+            {
+                new SqlParameter("@ID_Obra",SqlDbType.Int)
+            };
+
+            evaluacion[0].Value = ID;
+
+            respuesta = AC.BaseSegura(instruccion, AC.ConnectionEstablecida(ref MensajeC), ref Mensaje, evaluacion);
+
             return respuesta;
         }
     }

@@ -17,6 +17,7 @@ namespace WebApplication1
         List<TipoMaterial> lista_TipoMaterial = new List<TipoMaterial>();
         List<dueño> lista_dueño = new List<dueño>();
         List<Encargado> lista_Encargado = new List<Encargado>();
+        List<obra> lista_Obra = new List<obra>();
         string mensaje = "", mensajeC = "";
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -44,6 +45,13 @@ namespace WebApplication1
                 for (int i = 0; i < lista_Encargado.Count; i++)
                 {
                     DropDownList4.Items.Add(lista_Encargado[i].IdEncargado.ToString());
+                }
+
+                lista_Obra = LN.L_Obra(ref mensaje, ref mensajeC);
+                DropDownList5.Items.Add("");
+                for (int i = 0; i < lista_Obra.Count; i++)
+                {
+                    DropDownList5.Items.Add(lista_Obra[i].IdObra.ToString());
                 }
 
 
@@ -78,6 +86,28 @@ namespace WebApplication1
             catch
             {
                 Label1.Text = "Error al insertar los datos ";
+            }
+        }
+
+        protected void Button7_Click(object sender, EventArgs e)
+        {
+            GridView2.DataSource = LN.tablaObra(ref mensaje, ref mensajeC);
+            GridView2.DataBind();
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                int Id = Convert.ToInt32(DropDownList5.SelectedItem.Text);
+
+                LN.Elim_Obra(ref mensaje, ref mensajeC, Id);
+
+                Label2.Text = "se elimino";
+            }
+            catch
+            {
+                Label2.Text = "error checa tus datos";
             }
         }
 

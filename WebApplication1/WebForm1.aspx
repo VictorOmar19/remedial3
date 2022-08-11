@@ -33,7 +33,7 @@
         &nbsp;&nbsp;
         <asp:Button ID="actualizar" runat="server" Text="actualizar" />
             <br />
-        <asp:GridView ID="GridView1" runat="server">
+        <asp:GridView ID="GridView1" runat="server" Width="246px">
         </asp:GridView>
 
 
@@ -64,16 +64,31 @@
             <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
             <br />
             <br />
-            <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="Button" />
+            <asp:Button ID="Button6" runat="server" OnClick="Button6_Click" Text="agregar" />
+            &nbsp; &nbsp;
+            <asp:Button ID="Button7" runat="server" OnClick="Button7_Click" Text="Mostrar Datos" />
 &nbsp;
-        &nbsp;
-        &nbsp;<asp:Button ID="Button3" runat="server" Text="Mostar Datos" OnClick="Button4_Click" />
-        &nbsp;&nbsp;
-        <asp:Button ID="Button5" runat="server" Text="actualizar" />
             <br />
         <asp:GridView ID="GridView2" runat="server">
+
         </asp:GridView>
+            <br />
+            para eliminar selecciona el id de los datos que quieres eliminar
+            <br />
+            <br />
+            <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="true">
+            </asp:DropDownList>
+&nbsp;
+        <asp:Button ID="Button5" runat="server" Text="Eliminar" OnClick="Button5_Click" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
+        <p>
+            &nbsp;</p>
     </form>
 </body>
 </html>

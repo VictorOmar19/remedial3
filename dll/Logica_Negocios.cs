@@ -36,7 +36,10 @@ namespace dll
         {
             return OPC.ListaEncargado(ref mensaje, ref mensajeC);
         }
-
+        public List<obra> L_Obra(ref string mensaje, ref string mensajeC)
+        {
+            return OPC.ListaObra(ref mensaje, ref mensajeC);
+        }
 
         public string insertar_Material(string[] nuevoDatos, ref string mensaje, ref string mensajeC)
         {
@@ -86,6 +89,38 @@ namespace dll
         public DataTable tablaMaterial(ref string mensaje, ref string mensajeC)
         {
             string comandoMySql = "select * from Material;", etiqueta = "BDConstructora";
+            DataSet dataSet = null;
+            DataTable dataTable = null;
+
+
+            dataSet = AC.LecturaSet(comandoMySql, AC.ConnectionEstablecida(ref mensajeC), ref mensaje, etiqueta);
+            if (dataSet != null)
+            {
+                dataTable = dataSet.Tables[0];
+            }
+            return dataTable;
+
+        }
+
+        public string Elim_Obra(ref string Mensaje, ref string MensajeC, int ID)
+        {
+            string resp = "";
+            if (!OPC.EliminarObra(ref Mensaje, ref MensajeC, ID))
+            {
+                resp = "nu";
+
+            }
+            else
+            {
+                resp = "Viejo sabroso:3";
+            }
+            return resp;
+        }
+
+
+        public DataTable tablaObra(ref string mensaje, ref string mensajeC)
+        {
+            string comandoMySql = "select * from Obra;", etiqueta = "BDConstructora";
             DataSet dataSet = null;
             DataTable dataTable = null;
 
