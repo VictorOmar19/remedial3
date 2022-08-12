@@ -102,6 +102,23 @@ namespace dll
 
         }
 
+
+        public DataTable tablaviewMaterial(ref string mensaje, ref string mensajeC)
+        {
+            string comandoMySql = "select * from ViewMAterial;", etiqueta = "BDConstructora";
+            DataSet dataSet = null;
+            DataTable dataTable = null;
+
+
+            dataSet = AC.LecturaSet(comandoMySql, AC.ConnectionEstablecida(ref mensajeC), ref mensaje, etiqueta);
+            if (dataSet != null)
+            {
+                dataTable = dataSet.Tables[0];
+            }
+            return dataTable;
+
+        }
+
         public string Elim_Obra(ref string Mensaje, ref string MensajeC, int ID)
         {
             string resp = "";

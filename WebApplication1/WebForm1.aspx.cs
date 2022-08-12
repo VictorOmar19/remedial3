@@ -30,7 +30,7 @@ namespace WebApplication1
                 DropDownList2.Items.Add("");
                 for (int i = 0; i < lista_TipoMaterial.Count; i++)
                 {
-                    DropDownList2.Items.Add(lista_TipoMaterial[i].IdTipo.ToString());
+                    DropDownList2.Items.Add(lista_TipoMaterial[i].Tipo);
                 }
 
                 lista_dueño = LN.L_Dueño(ref mensaje, ref mensajeC);
@@ -65,18 +65,20 @@ namespace WebApplication1
 
         protected void Button4_Click(object sender, EventArgs e)
         {
-            GridView1.DataSource = LN.tablaMaterial(ref mensaje, ref mensajeC);
+            GridView1.DataSource = LN.tablaviewMaterial(ref mensaje, ref mensajeC);
             GridView1.DataBind();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+            lista_TipoMaterial = LN.L_TipoMaterial(ref mensaje, ref mensajeC);
+
             string[] datos = new string[4];
 
             datos[0] = TextBox1.Text;
             datos[1] = TextBox2.Text;
             datos[2] = TextBox3.Text;
-            datos[3] = DropDownList2.SelectedItem.Text;
+            datos[3] = lista_TipoMaterial.Where(x=>x.Tipo == DropDownList2.SelectedItem.Text).FirstOrDefault().IdTipo.ToString();
 
             try
             {
